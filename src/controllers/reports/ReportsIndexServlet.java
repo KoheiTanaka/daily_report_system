@@ -1,6 +1,7 @@
 package controllers.reports;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bookmarkCheck.BookmarkCheck;
+import models.Bookmark;
+import models.Employee;
 import models.Report;
 import utils.DBUtil;
 
@@ -35,6 +39,9 @@ public class ReportsIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
+
+
         int page;
         try{
             page=Integer.parseInt(request.getParameter("page"));
@@ -49,10 +56,33 @@ public class ReportsIndexServlet extends HttpServlet {
         long reports_count =(long)em.createNamedQuery("getReportsCount",Long.class)
                             .getSingleResult();
 
+        List<Bookmark> bookmark = em.createNamedQuery("getMyAllBookmark",Bookmark.class)
+                .setParameter("employee", login_employee)
+                .getResultList();
+
+        List<BookmarkCheck> bookmarkChecks = new ArrayList<BookmarkCheck>();
+        for(Report r : reports){
+            BookmarkCheck bmc = new BookmarkCheck();
+            bmc.setReport(r);
+
+            for(Bookmark bm : bookmark){
+                if(r.getId() == bm.getReport().getId()){
+                    bmc.setCheck(true);
+                }
+            }
+            bookmarkChecks.add(bmc);
+        }
+
+
+
+
+
+
         em.close();
 
-        request.setAttribute("reports",reports);
-        request.setAttribute("reports_count", reports_count);
+
+        request.setAttribute("bookmarkChecks", bookmarkChecks);
+        request.setAttribute("reports_count",reports_count);
         request.setAttribute("page", page);
         if(request.getSession().getAttribute("flush") != null){
             request.setAttribute("flush",request.getSession().getAttribute("flush"));

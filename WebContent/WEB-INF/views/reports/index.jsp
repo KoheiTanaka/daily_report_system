@@ -19,14 +19,26 @@
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
                 </tr>
-                <c:forEach var="report" items="${reports}" varStatus="status">
+                <c:forEach var="bmc" items="${bookmarkChecks}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out
-                                value="${report.employee.name}" /></td>
+                        <td class="report_name">
+                       <c:out
+                                value="${bmc.report.employee.name}" /></td>
                         <td class="report_date"><fmt:formatDate
-                                value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
-                        <td class="report_title">${report.title}</td>
-                        <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
+                                value='${bmc.report.report_date}' pattern='yyyy-MM-dd' /></td>
+                        <td class="report_title">${bmc.report.title}</td>
+                        <td class="report_action"><a
+                            href="<c:url value='/reports/show?id=${bmc.report.id}'/>">詳細を見る</a>
+                        <c:choose>
+                        <c:when test = "${bmc.check == true }">
+                        <a href ="<c:url value = '/destroy?id=${bmc.report.id}'/>">ブックマークをはずす</a>
+                        </c:when>
+                        <c:otherwise>
+                        <br /><a href="<c:url value='/create?id=${bmc.report.id}'/>">ブックマークする</a>
+                         </c:otherwise>
+                         </c:choose>
+                            </td>
+
                     </tr>
                 </c:forEach>
             </tbody>
