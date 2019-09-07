@@ -18,7 +18,8 @@
                         <td class="bookmark_name"><c:out value="${bookmark.report.employee.name}" /></td>
                         <td class="bookmark_date"><fmt:formatDate value='${bookmark.report.report_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="bookmark_title">${bookmark.report.title}</td>
-                        <td class="bookmark_action"><a href="<c:url value='/reports/show?id=${bookmark.report.id}' />">詳細を見る</a></td>
+                        <td class="bookmark_action"><a href="<c:url value='/reports/show?id=${bookmark.report.id}' />">詳細を見る</a><br/>
+                        <a href = "<c:url value = '/bookmark/destroy?id=${bookmark.report.id}'/>">ブックマークをはずす</a></td>
                     </tr>
 </c:forEach>
 </tbody>

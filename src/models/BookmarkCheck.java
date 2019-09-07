@@ -1,6 +1,4 @@
-package bookmarkCheck;
-import models.Report;
-
+package models;
 
 public class BookmarkCheck {
 

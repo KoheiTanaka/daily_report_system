@@ -23,9 +23,13 @@ import javax.persistence.Table;
             name = "getMyBookmarkCount",
             query = "SELECT COUNT(b) FROM Bookmark AS b WHERE b.employee = :employee"
             ),
+
     @NamedQuery(
-            name = "BookmarkCheck",
-            query ="SELECT b FROM Bookmark AS b WHERE b.bookmark_flag = 0 AND b.employee = :employee ")
+            name = "getBookMarkByEmpAndRep",
+            query = "SELECT b FROM Bookmark AS b WHERE b.employee = :employee AND b.report = :report"
+            ),
+
+
 
 })
 
@@ -44,16 +48,6 @@ private Employee employee;
 @JoinColumn(name = "report_id",nullable=false)
 private Report report;
 
-@Column(name = "bookmark_flag", nullable = false)
-private Integer bookmark_flag;
-
-public Integer getBookmark_flag() {
-    return bookmark_flag;
-}
-
-public void setBookmark_flag(Integer bookmark_flag) {
-    this.bookmark_flag = bookmark_flag;
-}
 
 public Integer getId() {
     return id;

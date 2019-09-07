@@ -41,7 +41,7 @@ public class bookmarkCreateServlet extends HttpServlet {
 
          Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
          b.setReport(r);
-         b.setBookmark_flag(0);
+
 
          em.getTransaction().begin();
          em.persist(b);

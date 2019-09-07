@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bookmarkCheck.BookmarkCheck;
 import models.Bookmark;
+import models.BookmarkCheck;
 import models.Employee;
 import models.Report;
 import utils.DBUtil;
@@ -40,6 +40,8 @@ public class ReportsIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
+
+
 
 
         int page;
