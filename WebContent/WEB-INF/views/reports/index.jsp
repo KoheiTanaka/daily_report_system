@@ -29,15 +29,14 @@
                         <td class="report_title">${bmc.report.title}</td>
                         <td class="report_action"><a
                             href="<c:url value='/reports/show?id=${bmc.report.id}'/>">詳細を見る</a><br/>
-                        <c:choose>
-                        <c:when test = "${bmc.check == true }">
-                        <a href ="<c:url value = '/bookmark/destroy?id=${bmc.report.id}'/>">ブックマークをはずす</a>
-                        </c:when>
-                        <c:otherwise>
+                            <c:choose>
+                    <c:when test="${bmc.check == true }">
+                        <a href="<c:url value = '/bookmark/destroy?id=${bmc.report.id}'/>">ブックマークをはずす</a>
+                    </c:when>
+                    <c:otherwise>
                         <a href="<c:url value='/create?id=${bmc.report.id}'/>">ブックマークする</a>
-                         </c:otherwise>
-                         </c:choose>
-                            </td>
+                    </c:otherwise>
+                </c:choose> </td>
 
                     </tr>
                 </c:forEach>

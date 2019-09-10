@@ -53,10 +53,13 @@ public class bookmarkDestroyServlet extends HttpServlet {
         em.close();
         request.getSession().setAttribute("flush", "ブックマークをはずしました。");
 
+String src = request.getParameter("src");
 
-
-
+if(src != null){
+    response.sendRedirect(request.getContextPath() + "/bookmark/index");
+}else{
         response.sendRedirect(request.getContextPath() + "/reports/index");
+}
     }
 
 }

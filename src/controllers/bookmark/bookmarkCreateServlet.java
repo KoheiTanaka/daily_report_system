@@ -47,6 +47,8 @@ public class bookmarkCreateServlet extends HttpServlet {
          em.persist(b);
          em.getTransaction().commit();
          em.close();
+
+
          request.getSession().setAttribute("flush", "ブックマークしました。");
 
          response.sendRedirect(request.getContextPath() + "/reports/index");
